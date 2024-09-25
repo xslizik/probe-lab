@@ -1,0 +1,24 @@
+---
+# Apache role variables
+apache_listen_port: 80
+apache_listen_port_ssl: 443
+apache_vhosts:
+  - servername: "localhost"
+    extra_parameters: "AllowEncodedSlashes On"
+apache_mods_enabled:
+  - ssl
+apache_ssl_protocol: "all -SSLv2 -SSLv3"
+apache_ssl_cipher_suite: "EXP-RC4-MD5:EXP-RC2-CBC-MD5"
+apache_ssl_honor_cipher_order: "on"
+
+# MySQL role variables
+mysql_port: "3306"
+mysql_root_password: "password"
+mysql_enabled_on_startup: true
+
+# UFW enabled ports
+ports:
+  - "{{ ssh_port }}"                 
+  - "{{ apache_listen_port }}"  
+  - "{{ apache_listen_port_ssl }}"  
+  - "{{ mysql_port }}"  

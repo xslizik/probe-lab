@@ -1,0 +1,24 @@
+---
+- name: Install SNMP
+  apt:
+    name: snmpd
+    state: present
+    update_cache: yes
+
+- name: Configure SNMP with weak community strings and specific port (CVE-2017-6739)
+  copy:
+    content: |
+      # Weak community string allowing unauthorized access
+      com2sec notConfigUser  default       public
+      # Allow SNMP requests on specific port and IP address
+      agentAddress udp:{{ ansible_default_ipv4.address }}:{{ snmp_port }}
+      
+      # Include other insecure settings (optional)
+      view all    included  .1
+      access notConfigGroup ""      any       noauth    exact  all    none   none
+    dest: /etc/snmp/snmpd.conf
+    
+- name: Restart snmpd
+  service:
+    name: snmpd
+    state: restarted

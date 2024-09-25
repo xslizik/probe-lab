@@ -1,0 +1,21 @@
+---
+- name: Install UFW
+  apt:
+    name: ufw
+    state: present
+    update_cache: yes
+
+- name: Enable specified ports in UFW
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+  loop: "{{ ports }}"
+
+- name: Enable UFW
+  ufw:
+    state: enabled
+
+- name: Ensure UFW is enabled on boot
+  systemd:
+    name: ufw
+    enabled: yes

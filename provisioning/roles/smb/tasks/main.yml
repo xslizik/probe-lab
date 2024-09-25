@@ -1,0 +1,25 @@
+---
+- name: Install Samba
+  apt:
+    name:
+      - samba
+    state: present
+    update_cache: yes
+
+- name: Configure vulnerable Samba version (CVE-2017-7494)
+  copy:
+    content: |
+      [global]
+      workgroup = WORKGROUP
+      server string = Samba Server %v
+      netbios name = debian
+      security = user
+      map to guest = Bad User
+      smb ports = {{ smb_port }} 
+      nmbd port = {{ nmbd_port }} 
+    dest: /etc/samba/smb.conf
+
+- name: Restart Samba
+  service:
+    name: smbd
+    state: restarted

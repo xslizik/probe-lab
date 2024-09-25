@@ -1,0 +1,23 @@
+---
+- name: Install vsftpd
+  apt:
+    name:
+      - vsftpd
+    state: present
+    update_cache: yes
+
+- name: Configure vulnerable vsftpd version (CVE-2011-2523)
+  copy:
+    content: |
+      listen_port= {{ ftp_port }}
+      listen=YES
+      anonymous_enable=YES
+      local_enable=YES
+      write_enable=YES
+      chroot_local_user=YES
+    dest: /etc/vsftpd.conf
+
+- name: Restart vsftpd
+  service:
+    name: vsftpd
+    state: restarted

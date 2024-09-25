@@ -1,0 +1,6 @@
+---
+- name: Disable and stop Postfix service
+  ansible.builtin.systemd:
+    name: postfix.service
+    enabled: false
+    state: stopped

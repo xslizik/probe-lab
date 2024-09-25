@@ -1,0 +1,35 @@
+---
+- name: Setup Web Server
+  hosts: server0
+  become: yes
+  roles:
+    - role: geerlingguy.apache
+    - role: geerlingguy.mysql
+    - role: smtp-stop
+
+- name: Setup File Server
+  hosts: server1
+  become: yes
+  roles:
+    - role: ftp
+    - role: smb
+
+- name: Setup Telnet/SNMP Server
+  hosts: server2
+  become: yes
+  roles:
+    - role: snmp
+    - role: telnet
+    - role: smtp-stop
+
+- name: Setup and enable UFW
+  hosts: servers
+  become: yes
+  roles:
+    - role: ufw
+
+- name: Execute kali role
+  become: yes
+  hosts: kali
+  roles: 
+    - kali

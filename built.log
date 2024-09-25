@@ -1,0 +1,702 @@
+Bringing machine 'server0' up with 'virtualbox' provider...
+Bringing machine 'server1' up with 'virtualbox' provider...
+Bringing machine 'server2' up with 'virtualbox' provider...
+Bringing machine 'kali' up with 'virtualbox' provider...
+==> server0: Importing base box 'generic/debian12'...
+==> server0: Matching MAC address for NAT networking...
+==> server0: Checking if box 'generic/debian12' version '4.3.12' is up to date...
+==> server0: Setting the name of the VM: probe-lab-server0-20240925221225
+==> server0: Clearing any previously set network interfaces...
+==> server0: Preparing network interfaces based on configuration...
+    server0: Adapter 1: nat
+    server0: Adapter 2: intnet
+==> server0: Forwarding ports...
+    server0: 22 (guest) => 2222 (host) (adapter 1)
+==> server0: Running 'pre-boot' VM customizations...
+==> server0: Booting VM...
+==> server0: Waiting for machine to boot. This may take a few minutes...
+    server0: SSH address: 127.0.0.1:2222
+    server0: SSH username: vagrant
+    server0: SSH auth method: private key
+    server0: Warning: Connection reset. Retrying...
+    server0: Warning: Remote connection disconnect. Retrying...
+    server0: Warning: Connection aborted. Retrying...
+    server0: 
+    server0: Vagrant insecure key detected. Vagrant will automatically replace
+    server0: this with a newly generated keypair for better security.
+    server0:
+    server0: Inserting generated public key within guest...
+    server0: Removing insecure key from the guest if it's present...
+    server0: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> server0: Machine booted and ready!
+==> server0: Checking for guest additions in VM...
+==> server0: Setting hostname...
+==> server0: Configuring and enabling network interfaces...
+==> server0: Rsyncing folder: /cygdrive/c/Users/slizi/Desktop/probe-lab/ => /vagrant
+==> server0:   - Exclude: [".vagrant/", ".git/"]
+==> server0: Running provisioner: ansible_local...
+    server0: Installing Ansible...
+    server0: Running ansible-galaxy...
+Starting galaxy role install process
+- downloading role 'apache', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-apache/archive/4.0.0.tar.gz
+- extracting geerlingguy.apache to /vagrant/provisioning/roles/geerlingguy.apache
+- geerlingguy.apache (4.0.0) was installed successfully
+- downloading role 'mysql', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-mysql/archive/4.3.4.tar.gz 
+- extracting geerlingguy.mysql to /vagrant/provisioning/roles/geerlingguy.mysql
+- geerlingguy.mysql (4.3.4) was installed successfully
+- downloading role 'vsftpd', owned by bogolyandras
+- downloading role from https://github.com/bogolyandras/ansible-role-vsftpd/archive/main.tar.gz
+- extracting bogolyandras.vsftpd to /vagrant/provisioning/roles/bogolyandras.vsftpd
+- bogolyandras.vsftpd (main) was installed successfully
+    server0: Running ansible-playbook...
+
+PLAY [Setup Web Server] ********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [server0]
+
+TASK [geerlingguy.apache : Include OS-specific variables.] *********************
+ok: [server0]
+
+TASK [geerlingguy.apache : Include variables for Amazon Linux.] ****************
+skipping: [server0]
+
+TASK [geerlingguy.apache : Define apache_packages.] ****************************
+ok: [server0]
+
+TASK [geerlingguy.apache : include_tasks] **************************************
+included: /vagrant/provisioning/roles/geerlingguy.apache/tasks/setup-Debian.yml for server0
+
+TASK [geerlingguy.apache : Update apt cache.] **********************************
+ok: [server0]
+
+TASK [geerlingguy.apache : Ensure Apache is installed on Debian.] **************
+changed: [server0]
+
+TASK [geerlingguy.apache : Get installed version of Apache.] *******************
+ok: [server0]
+
+TASK [geerlingguy.apache : Create apache_version variable.] ********************
+ok: [server0]
+
+TASK [geerlingguy.apache : Include Apache 2.2 variables.] **********************
+skipping: [server0]
+
+TASK [geerlingguy.apache : Include Apache 2.4 variables.] **********************
+ok: [server0]
+
+TASK [geerlingguy.apache : Configure Apache.] **********************************
+included: /vagrant/provisioning/roles/geerlingguy.apache/tasks/configure-Debian.yml for server0
+
+TASK [geerlingguy.apache : Configure Apache.] **********************************
+ok: [server0] => (item={'regexp': '^Listen ', 'line': 'Listen 80'})
+
+TASK [geerlingguy.apache : Enable Apache mods.] ********************************
+changed: [server0] => (item=ssl)
+
+TASK [geerlingguy.apache : Disable Apache mods.] *******************************
+skipping: [server0]
+
+TASK [geerlingguy.apache : Check whether certificates defined in vhosts exist.] ***
+skipping: [server0]
+
+TASK [geerlingguy.apache : Add apache vhosts configuration.] *******************
+changed: [server0]
+
+TASK [geerlingguy.apache : Add vhost symlink in sites-enabled.] ****************
+changed: [server0]
+
+TASK [geerlingguy.apache : Remove default vhost in sites-enabled.] *************
+skipping: [server0]
+
+TASK [geerlingguy.apache : Ensure Apache has selected state and enabled on boot.] ***
+ok: [server0]
+
+TASK [geerlingguy.mysql : ansible.builtin.include_tasks] ***********************
+included: /vagrant/provisioning/roles/geerlingguy.mysql/tasks/variables.yml for server0
+
+TASK [geerlingguy.mysql : Include OS-specific variables.] **********************
+ok: [server0] => (item=/vagrant/provisioning/roles/geerlingguy.mysql/vars/Debian-12.yml)
+
+TASK [geerlingguy.mysql : Define mysql_packages.] ******************************
+ok: [server0]
+
+TASK [geerlingguy.mysql : Define mysql_daemon.] ********************************
+ok: [server0]
+
+TASK [geerlingguy.mysql : Define mysql_slow_query_log_file.] *******************
+ok: [server0]
+
+TASK [geerlingguy.mysql : Define mysql_log_error.] *****************************
+ok: [server0]
+
+TASK [geerlingguy.mysql : Define mysql_syslog_tag.] ****************************
+ok: [server0]
+
+TASK [geerlingguy.mysql : Define mysql_pid_file.] ******************************
+ok: [server0]
+
+TASK [geerlingguy.mysql : Define mysql_config_file.] ***************************
+ok: [server0]
+
+TASK [geerlingguy.mysql : Define mysql_config_include_dir.] ********************
+ok: [server0]
+
+TASK [geerlingguy.mysql : Define mysql_socket.] ********************************
+ok: [server0]
+
+TASK [geerlingguy.mysql : Define mysql_supports_innodb_large_prefix.] **********
+ok: [server0]
+
+TASK [geerlingguy.mysql : ansible.builtin.include_tasks] ***********************
+skipping: [server0]
+
+TASK [geerlingguy.mysql : ansible.builtin.include_tasks] ***********************
+included: /vagrant/provisioning/roles/geerlingguy.mysql/tasks/setup-Debian.yml for server0
+
+TASK [geerlingguy.mysql : Check if MySQL is already installed.] ****************
+ok: [server0]
+
+TASK [geerlingguy.mysql : Update apt cache if MySQL is not yet installed.] *****
+ok: [server0]
+
+TASK [geerlingguy.mysql : Ensure MySQL Python libraries are installed.] ********
+changed: [server0]
+
+TASK [geerlingguy.mysql : Ensure MySQL packages are installed.] ****************
+changed: [server0]
+
+TASK [geerlingguy.mysql : Ensure MySQL is stopped after initial install.] ******
+ok: [server0]
+
+TASK [geerlingguy.mysql : Delete innodb log files created by apt package after initial install.] ***
+skipping: [server0] => (item=ib_logfile0) 
+skipping: [server0] => (item=ib_logfile1) 
+skipping: [server0]
+
+TASK [geerlingguy.mysql : ansible.builtin.include_tasks] ***********************
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Check if MySQL packages were installed.] *************
+ok: [server0]
+
+TASK [geerlingguy.mysql : ansible.builtin.include_tasks] ***********************
+included: /vagrant/provisioning/roles/geerlingguy.mysql/tasks/configure.yml for server0
+
+TASK [geerlingguy.mysql : Get MySQL version.] **********************************
+ok: [server0]
+
+TASK [geerlingguy.mysql : Copy my.cnf global MySQL configuration.] *************
+changed: [server0]
+
+TASK [geerlingguy.mysql : Verify mysql include directory exists.] **************
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Copy my.cnf override files into include directory.] ***
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Create slow query log file (if configured).] *********
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Create datadir if it does not exist] *****************
+ok: [server0]
+
+TASK [geerlingguy.mysql : Set ownership on slow query log file (if configured).] ***
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Create error log file (if configured).] **************
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Set ownership on error log file (if configured).] ****
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Ensure MySQL is started and enabled on boot.] ********
+changed: [server0]
+
+TASK [geerlingguy.mysql : ansible.builtin.include_tasks] ***********************
+included: /vagrant/provisioning/roles/geerlingguy.mysql/tasks/secure-installation.yml for server0
+
+TASK [geerlingguy.mysql : Ensure default user is present.] *********************
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Copy user-my.cnf file with password credentials.] ****
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Disallow root login remotely] ************************
+ok: [server0] => (item=DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'))
+
+TASK [geerlingguy.mysql : Get list of hosts for the root user.] ****************
+ok: [server0]
+
+TASK [geerlingguy.mysql : Update MySQL root password for localhost root account (5.7.x).] ***
+skipping: [server0] => (item=localhost) 
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Update MySQL root password for localhost root account (< 5.7.x).] ***
+changed: [server0] => (item=localhost)
+
+TASK [geerlingguy.mysql : Copy .my.cnf file with root password credentials.] ***
+changed: [server0]
+
+TASK [geerlingguy.mysql : Get list of hosts for the anonymous user.] ***********
+ok: [server0]
+
+TASK [geerlingguy.mysql : Remove anonymous MySQL users.] ***********************
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Remove MySQL test database.] *************************
+ok: [server0]
+
+TASK [geerlingguy.mysql : ansible.builtin.include_tasks] ***********************
+included: /vagrant/provisioning/roles/geerlingguy.mysql/tasks/databases.yml for server0
+
+TASK [geerlingguy.mysql : Ensure MySQL databases are present.] *****************
+skipping: [server0]
+
+TASK [geerlingguy.mysql : ansible.builtin.include_tasks] ***********************
+included: /vagrant/provisioning/roles/geerlingguy.mysql/tasks/users.yml for server0
+
+TASK [geerlingguy.mysql : Ensure MySQL users are present.] *********************
+skipping: [server0]
+
+TASK [geerlingguy.mysql : ansible.builtin.include_tasks] ***********************
+included: /vagrant/provisioning/roles/geerlingguy.mysql/tasks/replication.yml for server0
+
+TASK [geerlingguy.mysql : Ensure replication user exists on master.] ***********
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Check slave replication status.] *********************
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Check master replication status.] ********************
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Configure replication on the slave.] *****************
+skipping: [server0]
+
+TASK [geerlingguy.mysql : Start replication.] **********************************
+skipping: [server0]
+
+TASK [smtp-stop : Disable and stop Postfix service] ****************************
+changed: [server0]
+
+RUNNING HANDLER [geerlingguy.apache : restart apache] **************************
+changed: [server0]
+
+RUNNING HANDLER [geerlingguy.mysql : restart mysql] ****************************
+[WARNING]: Ignoring "sleep" as it is not used in "systemd"
+changed: [server0]
+
+PLAY [Setup File Server] *******************************************************
+skipping: no hosts matched
+
+PLAY [Setup Telnet/SNMP Server] ************************************************
+skipping: no hosts matched
+
+PLAY [Setup and enable UFW] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [server0]
+
+TASK [ufw : Install UFW] *******************************************************
+changed: [server0]
+
+TASK [ufw : Enable specified ports in UFW] *************************************
+changed: [server0] => (item=22)
+changed: [server0] => (item=80)
+changed: [server0] => (item=443)
+changed: [server0] => (item=3306)
+
+TASK [ufw : Enable UFW] ********************************************************
+changed: [server0]
+
+TASK [ufw : Ensure UFW is enabled on boot] *************************************
+ok: [server0]
+
+PLAY [Execute kali role] *******************************************************
+skipping: no hosts matched
+
+PLAY RECAP *********************************************************************
+server0                    : ok=57   changed=16   unreachable=0    failed=0    skipped=25   rescued=0    ignored=0
+
+==> server1: Importing base box 'generic/debian12'...
+==> server1: Matching MAC address for NAT networking...
+==> server1: Checking if box 'generic/debian12' version '4.3.12' is up to date...
+==> server1: Setting the name of the VM: probe-lab-server1-20240925221225
+==> server1: Fixed port collision for 22 => 2222. Now on port 2200.
+==> server1: Clearing any previously set network interfaces...
+==> server1: Preparing network interfaces based on configuration...
+    server1: Adapter 1: nat
+    server1: Adapter 2: intnet
+==> server1: Forwarding ports...
+    server1: 22 (guest) => 2200 (host) (adapter 1)
+==> server1: Running 'pre-boot' VM customizations...
+==> server1: Booting VM...
+==> server1: Waiting for machine to boot. This may take a few minutes...
+    server1: SSH address: 127.0.0.1:2200
+    server1: SSH username: vagrant
+    server1: SSH auth method: private key
+    server1: Warning: Connection reset. Retrying...
+    server1: Warning: Remote connection disconnect. Retrying...
+    server1: 
+    server1: Vagrant insecure key detected. Vagrant will automatically replace
+    server1: this with a newly generated keypair for better security.
+    server1: 
+    server1: Inserting generated public key within guest...
+    server1: Removing insecure key from the guest if it's present...
+    server1: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> server1: Machine booted and ready!
+==> server1: Checking for guest additions in VM...
+==> server1: Setting hostname...
+==> server1: Configuring and enabling network interfaces...
+==> server1: Rsyncing folder: /cygdrive/c/Users/slizi/Desktop/probe-lab/ => /vagrant
+==> server1:   - Exclude: [".vagrant/", ".git/"]
+==> server1: Running provisioner: ansible_local...
+    server1: Installing Ansible...
+    server1: Running ansible-galaxy...
+Starting galaxy role install process
+- downloading role 'apache', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-apache/archive/4.0.0.tar.gz
+- extracting geerlingguy.apache to /vagrant/provisioning/roles/geerlingguy.apache
+- geerlingguy.apache (4.0.0) was installed successfully
+- downloading role 'mysql', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-mysql/archive/4.3.4.tar.gz
+- extracting geerlingguy.mysql to /vagrant/provisioning/roles/geerlingguy.mysql
+- geerlingguy.mysql (4.3.4) was installed successfully
+- downloading role 'vsftpd', owned by bogolyandras
+- downloading role from https://github.com/bogolyandras/ansible-role-vsftpd/archive/main.tar.gz
+- extracting bogolyandras.vsftpd to /vagrant/provisioning/roles/bogolyandras.vsftpd
+- bogolyandras.vsftpd (main) was installed successfully
+    server1: Running ansible-playbook...
+
+PLAY [Setup Web Server] ********************************************************
+skipping: no hosts matched
+
+PLAY [Setup File Server] *******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [server1]
+
+TASK [ftp : Install vsftpd] ****************************************************
+changed: [server1]
+
+TASK [ftp : Configure vulnerable vsftpd version (CVE-2011-2523)] ***************
+changed: [server1]
+
+TASK [ftp : Restart vsftpd] ****************************************************
+changed: [server1]
+
+TASK [smb : Install Samba] *****************************************************
+changed: [server1]
+
+TASK [smb : Configure vulnerable Samba version (CVE-2017-7494)] ****************
+changed: [server1]
+
+TASK [smb : Restart Samba] *****************************************************
+changed: [server1]
+
+PLAY [Setup Telnet/SNMP Server] ************************************************
+skipping: no hosts matched
+
+PLAY [Setup and enable UFW] ****************************************************
+skipping: no hosts matched
+
+PLAY [Execute kali role] *******************************************************
+skipping: no hosts matched
+
+PLAY RECAP *********************************************************************
+server1                    : ok=7    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+==> server2: Importing base box 'generic/debian12'...
+==> server2: Matching MAC address for NAT networking...
+==> server2: Checking if box 'generic/debian12' version '4.3.12' is up to date...
+==> server2: Setting the name of the VM: probe-lab-server2-20240925221225
+==> server2: Fixed port collision for 22 => 2222. Now on port 2201.
+==> server2: Clearing any previously set network interfaces...
+==> server2: Preparing network interfaces based on configuration...
+    server2: Adapter 1: nat
+    server2: Adapter 2: intnet
+==> server2: Forwarding ports...
+    server2: 22 (guest) => 2201 (host) (adapter 1)
+==> server2: Running 'pre-boot' VM customizations...
+==> server2: Booting VM...
+==> server2: Waiting for machine to boot. This may take a few minutes...
+    server2: SSH address: 127.0.0.1:2201
+    server2: SSH username: vagrant
+    server2: SSH auth method: private key
+    server2: Warning: Connection reset. Retrying...
+    server2: Warning: Connection aborted. Retrying...
+    server2: Warning: Remote connection disconnect. Retrying...
+    server2: 
+    server2: Vagrant insecure key detected. Vagrant will automatically replace
+    server2: this with a newly generated keypair for better security.
+    server2: 
+    server2: Inserting generated public key within guest...
+    server2: Removing insecure key from the guest if it's present...
+    server2: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> server2: Machine booted and ready!
+==> server2: Checking for guest additions in VM...
+==> server2: Setting hostname...
+==> server2: Configuring and enabling network interfaces...
+==> server2: Rsyncing folder: /cygdrive/c/Users/slizi/Desktop/probe-lab/ => /vagrant
+==> server2:   - Exclude: [".vagrant/", ".git/"]
+==> server2: Running provisioner: ansible_local...
+    server2: Installing Ansible...
+    server2: Running ansible-galaxy...
+Starting galaxy role install process
+- downloading role 'apache', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-apache/archive/4.0.0.tar.gz
+- extracting geerlingguy.apache to /vagrant/provisioning/roles/geerlingguy.apache
+- geerlingguy.apache (4.0.0) was installed successfully
+- downloading role 'mysql', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-mysql/archive/4.3.4.tar.gz
+- extracting geerlingguy.mysql to /vagrant/provisioning/roles/geerlingguy.mysql
+- geerlingguy.mysql (4.3.4) was installed successfully
+- downloading role 'vsftpd', owned by bogolyandras
+- downloading role from https://github.com/bogolyandras/ansible-role-vsftpd/archive/main.tar.gz
+- extracting bogolyandras.vsftpd to /vagrant/provisioning/roles/bogolyandras.vsftpd
+- bogolyandras.vsftpd (main) was installed successfully
+    server2: Running ansible-playbook...
+
+PLAY [Setup Web Server] ********************************************************
+skipping: no hosts matched
+
+PLAY [Setup File Server] *******************************************************
+skipping: no hosts matched
+
+PLAY [Setup Telnet/SNMP Server] ************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [server2]
+
+TASK [telnet : Install Telnet and xinetd] **************************************
+changed: [server2]
+
+TASK [telnet : Create xinetd configuration for Telnet (CVE-2016-5696)] *********
+changed: [server2]
+
+TASK [telnet : Ensure Telnet service is listening on the custom port] **********
+changed: [server2]
+
+TASK [telnet : Restart xinetd] *************************************************
+[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
+with a mode of 0700, this may cause issues when running as another user. To
+avoid this, create the remote_tmp dir with the correct permissions manually
+changed: [server2]
+
+TASK [smtp-stop : Disable and stop Postfix service] ****************************
+changed: [server2]
+
+PLAY [Setup and enable UFW] ****************************************************
+skipping: no hosts matched
+
+PLAY [Execute kali role] *******************************************************
+skipping: no hosts matched
+
+PLAY RECAP *********************************************************************
+server2                    : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+==> kali: Importing base box 'kalilinux/rolling'...
+==> kali: Matching MAC address for NAT networking...
+==> kali: Checking if box 'kalilinux/rolling' version '2024.3.0' is up to date...
+==> kali: Setting the name of the VM: probe-lab-kali-20240925221225
+==> kali: Fixed port collision for 22 => 2222. Now on port 2202.
+==> kali: Clearing any previously set network interfaces...
+==> kali: Preparing network interfaces based on configuration...
+    kali: Adapter 1: nat
+    kali: Adapter 2: intnet
+==> kali: Forwarding ports...
+    kali: 22 (guest) => 2202 (host) (adapter 1)
+==> kali: Running 'pre-boot' VM customizations...
+==> kali: Booting VM...
+==> kali: Waiting for machine to boot. This may take a few minutes...
+    kali: SSH address: 127.0.0.1:2202
+    kali: SSH username: vagrant
+    kali: SSH auth method: private key
+    kali: 
+    kali: Vagrant insecure key detected. Vagrant will automatically replace
+    kali: this with a newly generated keypair for better security.
+    kali: 
+    kali: Inserting generated public key within guest...
+    kali: Removing insecure key from the guest if it's present...
+    kali: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> kali: Machine booted and ready!
+==> kali: Checking for guest additions in VM...
+==> kali: Setting hostname...
+==> kali: Configuring and enabling network interfaces...
+==> kali: Rsyncing folder: /cygdrive/c/Users/slizi/Desktop/probe-lab/ => /vagrant
+==> kali:   - Exclude: [".vagrant/", ".git/"]
+==> kali: Running provisioner: ansible_local...
+    kali: Installing Ansible...
+    kali: Running ansible-galaxy...
+Starting galaxy role install process
+- downloading role 'apache', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-apache/archive/4.0.0.tar.gz
+- extracting geerlingguy.apache to /vagrant/provisioning/roles/geerlingguy.apache
+- geerlingguy.apache (4.0.0) was installed successfully
+- downloading role 'mysql', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-mysql/archive/4.3.4.tar.gz
+- extracting geerlingguy.mysql to /vagrant/provisioning/roles/geerlingguy.mysql
+- geerlingguy.mysql (4.3.4) was installed successfully
+- downloading role 'vsftpd', owned by bogolyandras
+- downloading role from https://github.com/bogolyandras/ansible-role-vsftpd/archive/main.tar.gz
+- extracting bogolyandras.vsftpd to /vagrant/provisioning/roles/bogolyandras.vsftpd
+- bogolyandras.vsftpd (main) was installed successfully
+    kali: Running ansible-playbook...
+
+PLAY [Setup Web Server] ********************************************************
+
+PLAY [Setup File Server] *******************************************************
+skipping: no hosts matched
+
+PLAY [Setup Telnet/SNMP Server] ************************************************
+skipping: no hosts matched
+
+PLAY [Setup and enable UFW] ****************************************************
+skipping: no hosts matched
+
+PLAY [Execute kali role] *******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [kali]
+
+TASK [kali : Restart networking] ***********************************************
+changed: [kali]
+
+TASK [kali : Update apt cache] *************************************************
+ok: [kali]
+
+TASK [kali : Install Zmap] *****************************************************
+changed: [kali]
+
+TASK [kali : Download Go binary] ***********************************************
+changed: [kali]
+[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
+with a mode of 0700, this may cause issues when running as another user. To
+avoid this, create the remote_tmp dir with the correct permissions manually
+
+TASK [kali : Extract Go binary] ************************************************
+
+PLAY [Setup Telnet/SNMP Server] ************************************************
+skipping: no hosts matched
+
+PLAY [Setup and enable UFW] ****************************************************
+skipping: no hosts matched
+
+PLAY [Execute kali role] *******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [kali]
+
+TASK [kali : Restart networking] ***********************************************
+changed: [kali]
+
+TASK [kali : Update apt cache] *************************************************
+ok: [kali]
+
+TASK [kali : Install Zmap] *****************************************************
+changed: [kali]
+
+TASK [kali : Download Go binary] ***********************************************
+changed: [kali]
+[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
+with a mode of 0700, this may cause issues when running as another user. To
+avoid this, create the remote_tmp dir with the correct permissions manually
+
+TASK [kali : Extract Go binary] ************************************************
+changed: [kali]
+
+PLAY [Setup and enable UFW] ****************************************************
+skipping: no hosts matched
+
+PLAY [Execute kali role] *******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [kali]
+
+TASK [kali : Restart networking] ***********************************************
+changed: [kali]
+
+TASK [kali : Update apt cache] *************************************************
+ok: [kali]
+
+TASK [kali : Install Zmap] *****************************************************
+changed: [kali]
+
+TASK [kali : Download Go binary] ***********************************************
+changed: [kali]
+[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
+with a mode of 0700, this may cause issues when running as another user. To
+avoid this, create the remote_tmp dir with the correct permissions manually
+
+TASK [kali : Extract Go binary] ************************************************
+changed: [kali]
+TASK [Gathering Facts] *********************************************************
+ok: [kali]
+
+TASK [kali : Restart networking] ***********************************************
+changed: [kali]
+
+TASK [kali : Update apt cache] *************************************************
+ok: [kali]
+
+TASK [kali : Install Zmap] *****************************************************
+changed: [kali]
+
+TASK [kali : Download Go binary] ***********************************************
+changed: [kali]
+[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
+with a mode of 0700, this may cause issues when running as another user. To
+avoid this, create the remote_tmp dir with the correct permissions manually
+
+TASK [kali : Extract Go binary] ************************************************
+changed: [kali]
+
+TASK [kali : Update apt cache] *************************************************
+ok: [kali]
+
+TASK [kali : Install Zmap] *****************************************************
+changed: [kali]
+
+TASK [kali : Download Go binary] ***********************************************
+changed: [kali]
+[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
+with a mode of 0700, this may cause issues when running as another user. To
+avoid this, create the remote_tmp dir with the correct permissions manually
+
+TASK [kali : Extract Go binary] ************************************************
+changed: [kali]
+changed: [kali]
+
+TASK [kali : Download Go binary] ***********************************************
+changed: [kali]
+[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
+with a mode of 0700, this may cause issues when running as another user. To
+avoid this, create the remote_tmp dir with the correct permissions manually
+
+TASK [kali : Extract Go binary] ************************************************
+changed: [kali]
+with a mode of 0700, this may cause issues when running as another user. To
+avoid this, create the remote_tmp dir with the correct permissions manually
+
+TASK [kali : Extract Go binary] ************************************************
+changed: [kali]
+TASK [kali : Extract Go binary] ************************************************
+changed: [kali]
+changed: [kali]
+TASK [kali : Remove Go tar file] ***********************************************
+changed: [kali]
+
+TASK [kali : Set up Go environment variable] ***********************************
+changed: [kali]
+
+TASK [kali : Copy nscan to /vagrant/home] **************************************
+changed: [kali]
+
+TASK [kali : ansible.builtin.include_tasks] ************************************
+skipping: [kali]
+
+PLAY RECAP *********************************************************************
+kali                       : ok=9    changed=7    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
