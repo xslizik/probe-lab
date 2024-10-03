@@ -8,5 +8,4 @@ ports:
   - "{{ ssh_port }}"   
   - "{{ ftp_port }}"   
   - "{{ smb_port }}"   
-  - "{{ nmbd_port }}"  
-  - "{{ smtp_port }}"   
+  - "{{ nmbd_port }}"    

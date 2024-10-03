@@ -1,30 +1,132 @@
+Bringing machine 'router' up with 'virtualbox' provider...
 Bringing machine 'server0' up with 'virtualbox' provider...
 Bringing machine 'server1' up with 'virtualbox' provider...
 Bringing machine 'server2' up with 'virtualbox' provider...
 Bringing machine 'kali' up with 'virtualbox' provider...
+==> router: You assigned a static IP ending in ".1" to this machine.
+==> router: This is very often used by the router and can cause the
+==> router: network to not work properly. If the network doesn't work
+==> router: properly, try changing this IP.
+==> router: You assigned a static IP ending in ".1" to this machine.
+==> router: This is very often used by the router and can cause the
+==> router: network to not work properly. If the network doesn't work
+==> router: properly, try changing this IP.
+==> router: Importing base box 'generic/debian12'...
+==> router: Matching MAC address for NAT networking...
+==> router: You assigned a static IP ending in ".1" to this machine.
+==> router: This is very often used by the router and can cause the
+==> router: network to not work properly. If the network doesn't work
+==> router: properly, try changing this IP.
+==> router: You assigned a static IP ending in ".1" to this machine.
+==> router: This is very often used by the router and can cause the
+==> router: network to not work properly. If the network doesn't work
+==> router: properly, try changing this IP.
+==> router: Checking if box 'generic/debian12' version '4.3.12' is up to date...
+==> router: Setting the name of the VM: probe-lab-router-20241003222633
+==> router: Clearing any previously set network interfaces...
+==> router: Preparing network interfaces based on configuration...
+==> router: Preparing network interfaces based on configuration...
+    router: Adapter 1: nat
+    router: Adapter 2: intnet
+    router: Adapter 3: intnet
+==> router: Forwarding ports...
+    router: 22 (guest) => 2222 (host) (adapter 1)
+==> router: Running 'pre-boot' VM customizations...
+==> router: Booting VM...
+==> router: Waiting for machine to boot. This may take a few minutes...
+    router: SSH address: 127.0.0.1:2222
+    router: SSH username: vagrant
+    router: SSH auth method: private key
+    router: Warning: Connection reset. Retrying...
+    router: Warning: Connection aborted. Retrying...
+    router: Warning: Remote connection disconnect. Retrying...
+    router:
+    router: Vagrant insecure key detected. Vagrant will automatically replace
+    router: this with a newly generated keypair for better security.
+    router:
+    router: Inserting generated public key within guest...
+    router: Removing insecure key from the guest if it's present...
+    router: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> router: Machine booted and ready!
+==> router: Checking for guest additions in VM...
+==> router: Setting hostname...
+==> router: Configuring and enabling network interfaces...
+==> router: Rsyncing folder: /cygdrive/c/Users/slizi/Desktop/probe-lab/ => /vagrant
+==> router:   - Exclude: [".vagrant/", ".git/"]
+==> router: Running provisioner: ansible_local...
+    router: Installing Ansible...
+    router: Running ansible-galaxy...
+Starting galaxy role install process
+- downloading role 'apache', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-apache/archive/4.0.0.tar.gz
+- extracting geerlingguy.apache to /vagrant/provisioning/roles/geerlingguy.apache
+- geerlingguy.apache (4.0.0) was installed successfully
+- downloading role 'mysql', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-mysql/archive/4.3.4.tar.gz
+- extracting geerlingguy.mysql to /vagrant/provisioning/roles/geerlingguy.mysql
+- geerlingguy.mysql (4.3.4) was installed successfully
+- downloading role 'vsftpd', owned by bogolyandras
+- downloading role from https://github.com/bogolyandras/ansible-role-vsftpd/archive/main.tar.gz
+- extracting bogolyandras.vsftpd to /vagrant/provisioning/roles/bogolyandras.vsftpd
+- bogolyandras.vsftpd (main) was installed successfully
+    router: Running ansible-playbook...
+
+PLAY [Setup Web Server] ********************************************************
+skipping: no hosts matched
+
+PLAY [Setup File Server] *******************************************************
+skipping: no hosts matched
+
+PLAY [Setup Telnet/SNMP Server] ************************************************
+skipping: no hosts matched
+
+PLAY [Enable UFW and setup Routing] ********************************************
+skipping: no hosts matched
+
+PLAY [Execute kali role] *******************************************************
+skipping: no hosts matched
+
+PLAY [Execute router role] *****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [router]
+
+TASK [router : Enable IP forwarding] *******************************************
+changed: [router]
+
+TASK [router : Stop Postfix service] *******************************************
+changed: [router]
+
+TASK [router : Disable Postfix service] ****************************************
+changed: [router]
+
+PLAY RECAP *********************************************************************
+router                     : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
 ==> server0: Importing base box 'generic/debian12'...
 ==> server0: Matching MAC address for NAT networking...
 ==> server0: Checking if box 'generic/debian12' version '4.3.12' is up to date...
-==> server0: Setting the name of the VM: probe-lab-server0-20240925221225
+==> server0: Setting the name of the VM: probe-lab-server0-20241003222633
+==> server0: Fixed port collision for 22 => 2222. Now on port 2200.
 ==> server0: Clearing any previously set network interfaces...
 ==> server0: Preparing network interfaces based on configuration...
     server0: Adapter 1: nat
     server0: Adapter 2: intnet
 ==> server0: Forwarding ports...
-    server0: 22 (guest) => 2222 (host) (adapter 1)
+    server0: 22 (guest) => 2200 (host) (adapter 1)
 ==> server0: Running 'pre-boot' VM customizations...
 ==> server0: Booting VM...
 ==> server0: Waiting for machine to boot. This may take a few minutes...
-    server0: SSH address: 127.0.0.1:2222
+    server0: SSH address: 127.0.0.1:2200
     server0: SSH username: vagrant
     server0: SSH auth method: private key
     server0: Warning: Connection reset. Retrying...
-    server0: Warning: Remote connection disconnect. Retrying...
     server0: Warning: Connection aborted. Retrying...
+    server0: Warning: Remote connection disconnect. Retrying...
     server0: 
     server0: Vagrant insecure key detected. Vagrant will automatically replace
     server0: this with a newly generated keypair for better security.
-    server0:
+    server0: 
     server0: Inserting generated public key within guest...
     server0: Removing insecure key from the guest if it's present...
     server0: Key inserted! Disconnecting and reconnecting using new SSH key...
@@ -43,7 +145,7 @@ Starting galaxy role install process
 - extracting geerlingguy.apache to /vagrant/provisioning/roles/geerlingguy.apache
 - geerlingguy.apache (4.0.0) was installed successfully
 - downloading role 'mysql', owned by geerlingguy
-- downloading role from https://github.com/geerlingguy/ansible-role-mysql/archive/4.3.4.tar.gz 
+- downloading role from https://github.com/geerlingguy/ansible-role-mysql/archive/4.3.4.tar.gz
 - extracting geerlingguy.mysql to /vagrant/provisioning/roles/geerlingguy.mysql
 - geerlingguy.mysql (4.3.4) was installed successfully
 - downloading role 'vsftpd', owned by bogolyandras
@@ -295,7 +397,7 @@ skipping: no hosts matched
 PLAY [Setup Telnet/SNMP Server] ************************************************
 skipping: no hosts matched
 
-PLAY [Setup and enable UFW] ****************************************************
+PLAY [Enable UFW and setup Routing] ********************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [server0]
@@ -315,31 +417,37 @@ changed: [server0]
 TASK [ufw : Ensure UFW is enabled on boot] *************************************
 ok: [server0]
 
+TASK [ufw : Add route to 10.20.0.0/16 via 10.10.0.1] ***************************
+changed: [server0]
+
 PLAY [Execute kali role] *******************************************************
 skipping: no hosts matched
 
+PLAY [Execute router role] *****************************************************
+skipping: no hosts matched
+
 PLAY RECAP *********************************************************************
-server0                    : ok=57   changed=16   unreachable=0    failed=0    skipped=25   rescued=0    ignored=0
+server0                    : ok=58   changed=17   unreachable=0    failed=0    skipped=25   rescued=0    ignored=0
 
 ==> server1: Importing base box 'generic/debian12'...
 ==> server1: Matching MAC address for NAT networking...
 ==> server1: Checking if box 'generic/debian12' version '4.3.12' is up to date...
-==> server1: Setting the name of the VM: probe-lab-server1-20240925221225
-==> server1: Fixed port collision for 22 => 2222. Now on port 2200.
+==> server1: Setting the name of the VM: probe-lab-server1-20241003222633
+==> server1: Fixed port collision for 22 => 2222. Now on port 2201.
 ==> server1: Clearing any previously set network interfaces...
 ==> server1: Preparing network interfaces based on configuration...
     server1: Adapter 1: nat
     server1: Adapter 2: intnet
 ==> server1: Forwarding ports...
-    server1: 22 (guest) => 2200 (host) (adapter 1)
+    server1: 22 (guest) => 2201 (host) (adapter 1)
 ==> server1: Running 'pre-boot' VM customizations...
 ==> server1: Booting VM...
 ==> server1: Waiting for machine to boot. This may take a few minutes...
-    server1: SSH address: 127.0.0.1:2200
+    server1: SSH address: 127.0.0.1:2201
     server1: SSH username: vagrant
     server1: SSH auth method: private key
+    server1: Warning: Connection aborted. Retrying...
     server1: Warning: Connection reset. Retrying...
-    server1: Warning: Remote connection disconnect. Retrying...
     server1: 
     server1: Vagrant insecure key detected. Vagrant will automatically replace
     server1: this with a newly generated keypair for better security.
@@ -397,38 +505,64 @@ changed: [server1]
 TASK [smb : Restart Samba] *****************************************************
 changed: [server1]
 
+TASK [smtp-stop : Disable and stop Postfix service] ****************************
+changed: [server1]
+
 PLAY [Setup Telnet/SNMP Server] ************************************************
 skipping: no hosts matched
 
-PLAY [Setup and enable UFW] ****************************************************
-skipping: no hosts matched
+PLAY [Enable UFW and setup Routing] ********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [server1]
+
+TASK [ufw : Install UFW] *******************************************************
+changed: [server1]
+
+TASK [ufw : Enable specified ports in UFW] *************************************
+changed: [server1] => (item=22)
+changed: [server1] => (item=21)
+changed: [server1] => (item=445)
+changed: [server1] => (item=137)
+
+TASK [ufw : Enable UFW] ********************************************************
+changed: [server1]
+
+TASK [ufw : Ensure UFW is enabled on boot] *************************************
+ok: [server1]
+
+TASK [ufw : Add route to 10.20.0.0/16 via 10.10.0.1] ***************************
+changed: [server1]
 
 PLAY [Execute kali role] *******************************************************
 skipping: no hosts matched
 
+PLAY [Execute router role] *****************************************************
+skipping: no hosts matched
+
 PLAY RECAP *********************************************************************
-server1                    : ok=7    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+server1                    : ok=14   changed=11   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
 ==> server2: Importing base box 'generic/debian12'...
 ==> server2: Matching MAC address for NAT networking...
 ==> server2: Checking if box 'generic/debian12' version '4.3.12' is up to date...
-==> server2: Setting the name of the VM: probe-lab-server2-20240925221225
-==> server2: Fixed port collision for 22 => 2222. Now on port 2201.
+==> server2: Setting the name of the VM: probe-lab-server2-20241003222633
+==> server2: Fixed port collision for 22 => 2222. Now on port 2202.
 ==> server2: Clearing any previously set network interfaces...
 ==> server2: Preparing network interfaces based on configuration...
     server2: Adapter 1: nat
     server2: Adapter 2: intnet
 ==> server2: Forwarding ports...
-    server2: 22 (guest) => 2201 (host) (adapter 1)
+    server2: 22 (guest) => 2202 (host) (adapter 1)
 ==> server2: Running 'pre-boot' VM customizations...
 ==> server2: Booting VM...
 ==> server2: Waiting for machine to boot. This may take a few minutes...
-    server2: SSH address: 127.0.0.1:2201
+    server2: SSH address: 127.0.0.1:2202
     server2: SSH username: vagrant
     server2: SSH auth method: private key
     server2: Warning: Connection reset. Retrying...
-    server2: Warning: Connection aborted. Retrying...
     server2: Warning: Remote connection disconnect. Retrying...
+    server2: Warning: Connection aborted. Retrying...
     server2: 
     server2: Vagrant insecure key detected. Vagrant will automatically replace
     server2: this with a newly generated keypair for better security.
@@ -471,48 +605,63 @@ PLAY [Setup Telnet/SNMP Server] ************************************************
 TASK [Gathering Facts] *********************************************************
 ok: [server2]
 
-TASK [telnet : Install Telnet and xinetd] **************************************
+TASK [snmp : Install SNMP] *****************************************************
 changed: [server2]
 
-TASK [telnet : Create xinetd configuration for Telnet (CVE-2016-5696)] *********
+TASK [snmp : Configure SNMP with weak community strings and specific port (CVE-2017-6739)] ***
 changed: [server2]
 
-TASK [telnet : Ensure Telnet service is listening on the custom port] **********
+TASK [snmp : Restart snmpd] ****************************************************
 changed: [server2]
 
-TASK [telnet : Restart xinetd] *************************************************
-[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
-with a mode of 0700, this may cause issues when running as another user. To
-avoid this, create the remote_tmp dir with the correct permissions manually
+PLAY [Enable UFW and setup Routing] ********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [server2]
+
+TASK [ufw : Install UFW] *******************************************************
 changed: [server2]
 
-TASK [smtp-stop : Disable and stop Postfix service] ****************************
+TASK [ufw : Enable specified ports in UFW] *************************************
+changed: [server2] => (item=161)
+changed: [server2] => (item=25)
+
+TASK [ufw : Enable UFW] ********************************************************
 changed: [server2]
 
-PLAY [Setup and enable UFW] ****************************************************
-skipping: no hosts matched
+TASK [ufw : Ensure UFW is enabled on boot] *************************************
+ok: [server2]
+
+TASK [ufw : Add route to 10.20.0.0/16 via 10.10.0.1] ***************************
+changed: [server2]
 
 PLAY [Execute kali role] *******************************************************
 skipping: no hosts matched
 
+PLAY [Execute router role] *****************************************************
+skipping: no hosts matched
+
 PLAY RECAP *********************************************************************
-server2                    : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+server2                    : ok=10   changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
 ==> kali: Importing base box 'kalilinux/rolling'...
 ==> kali: Matching MAC address for NAT networking...
 ==> kali: Checking if box 'kalilinux/rolling' version '2024.3.0' is up to date...
-==> kali: Setting the name of the VM: probe-lab-kali-20240925221225
-==> kali: Fixed port collision for 22 => 2222. Now on port 2202.
+==> kali: A newer version of the box 'kalilinux/rolling' for provider 'virtualbox' is
+==> kali: available! You currently have version '2024.3.0'. The latest is version
+==> kali: '2024.3.1'. Run `vagrant box update` to update.
+==> kali: Setting the name of the VM: probe-lab-kali-20241003222633
+==> kali: Fixed port collision for 22 => 2222. Now on port 2203.
 ==> kali: Clearing any previously set network interfaces...
 ==> kali: Preparing network interfaces based on configuration...
     kali: Adapter 1: nat
     kali: Adapter 2: intnet
 ==> kali: Forwarding ports...
-    kali: 22 (guest) => 2202 (host) (adapter 1)
+    kali: 22 (guest) => 2203 (host) (adapter 1)
 ==> kali: Running 'pre-boot' VM customizations...
 ==> kali: Booting VM...
 ==> kali: Waiting for machine to boot. This may take a few minutes...
-    kali: SSH address: 127.0.0.1:2202
+    kali: SSH address: 127.0.0.1:2203
     kali: SSH username: vagrant
     kali: SSH auth method: private key
     kali: 
@@ -547,6 +696,7 @@ Starting galaxy role install process
     kali: Running ansible-playbook...
 
 PLAY [Setup Web Server] ********************************************************
+skipping: no hosts matched
 
 PLAY [Setup File Server] *******************************************************
 skipping: no hosts matched
@@ -554,7 +704,7 @@ skipping: no hosts matched
 PLAY [Setup Telnet/SNMP Server] ************************************************
 skipping: no hosts matched
 
-PLAY [Setup and enable UFW] ****************************************************
+PLAY [Enable UFW and setup Routing] ********************************************
 skipping: no hosts matched
 
 PLAY [Execute kali role] *******************************************************
@@ -565,32 +715,7 @@ ok: [kali]
 TASK [kali : Restart networking] ***********************************************
 changed: [kali]
 
-TASK [kali : Update apt cache] *************************************************
-ok: [kali]
-
-TASK [kali : Install Zmap] *****************************************************
-changed: [kali]
-
-TASK [kali : Download Go binary] ***********************************************
-changed: [kali]
-[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
-with a mode of 0700, this may cause issues when running as another user. To
-avoid this, create the remote_tmp dir with the correct permissions manually
-
-TASK [kali : Extract Go binary] ************************************************
-
-PLAY [Setup Telnet/SNMP Server] ************************************************
-skipping: no hosts matched
-
-PLAY [Setup and enable UFW] ****************************************************
-skipping: no hosts matched
-
-PLAY [Execute kali role] *******************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [kali]
-
-TASK [kali : Restart networking] ***********************************************
+TASK [kali : Add route to 10.10.0.0/16 via 10.20.0.1] **************************
 changed: [kali]
 
 TASK [kali : Update apt cache] *************************************************
@@ -599,104 +724,14 @@ ok: [kali]
 TASK [kali : Install Zmap] *****************************************************
 changed: [kali]
 
-TASK [kali : Download Go binary] ***********************************************
-changed: [kali]
-[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
-with a mode of 0700, this may cause issues when running as another user. To
-avoid this, create the remote_tmp dir with the correct permissions manually
-
-TASK [kali : Extract Go binary] ************************************************
-changed: [kali]
-
-PLAY [Setup and enable UFW] ****************************************************
-skipping: no hosts matched
-
-PLAY [Execute kali role] *******************************************************
-
-TASK [Gathering Facts] *********************************************************
-ok: [kali]
-
-TASK [kali : Restart networking] ***********************************************
-changed: [kali]
-
-TASK [kali : Update apt cache] *************************************************
-ok: [kali]
-
-TASK [kali : Install Zmap] *****************************************************
-changed: [kali]
-
-TASK [kali : Download Go binary] ***********************************************
-changed: [kali]
-[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
-with a mode of 0700, this may cause issues when running as another user. To
-avoid this, create the remote_tmp dir with the correct permissions manually
-
-TASK [kali : Extract Go binary] ************************************************
-changed: [kali]
-TASK [Gathering Facts] *********************************************************
-ok: [kali]
-
-TASK [kali : Restart networking] ***********************************************
-changed: [kali]
-
-TASK [kali : Update apt cache] *************************************************
-ok: [kali]
-
-TASK [kali : Install Zmap] *****************************************************
-changed: [kali]
-
-TASK [kali : Download Go binary] ***********************************************
-changed: [kali]
-[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
-with a mode of 0700, this may cause issues when running as another user. To
-avoid this, create the remote_tmp dir with the correct permissions manually
-
-TASK [kali : Extract Go binary] ************************************************
-changed: [kali]
-
-TASK [kali : Update apt cache] *************************************************
-ok: [kali]
-
-TASK [kali : Install Zmap] *****************************************************
-changed: [kali]
-
-TASK [kali : Download Go binary] ***********************************************
-changed: [kali]
-[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
-with a mode of 0700, this may cause issues when running as another user. To
-avoid this, create the remote_tmp dir with the correct permissions manually
-
-TASK [kali : Extract Go binary] ************************************************
-changed: [kali]
-changed: [kali]
-
-TASK [kali : Download Go binary] ***********************************************
-changed: [kali]
-[WARNING]: Module remote_tmp /root/.ansible/tmp did not exist and was created
-with a mode of 0700, this may cause issues when running as another user. To
-avoid this, create the remote_tmp dir with the correct permissions manually
-
-TASK [kali : Extract Go binary] ************************************************
-changed: [kali]
-with a mode of 0700, this may cause issues when running as another user. To
-avoid this, create the remote_tmp dir with the correct permissions manually
-
-TASK [kali : Extract Go binary] ************************************************
-changed: [kali]
-TASK [kali : Extract Go binary] ************************************************
-changed: [kali]
-changed: [kali]
-TASK [kali : Remove Go tar file] ***********************************************
-changed: [kali]
-
-TASK [kali : Set up Go environment variable] ***********************************
-changed: [kali]
-
-TASK [kali : Copy nscan to /vagrant/home] **************************************
+TASK [kali : Copy nscan to /opt and make it executable] ************************
 changed: [kali]
 
 TASK [kali : ansible.builtin.include_tasks] ************************************
 skipping: [kali]
 
+PLAY [Execute router role] *****************************************************
+skipping: no hosts matched
+
 PLAY RECAP *********************************************************************
-kali                       : ok=9    changed=7    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+kali                       : ok=6    changed=4    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0

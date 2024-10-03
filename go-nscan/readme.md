@@ -1,5 +1,5 @@
 ### Nscan.go
-Custom Network Scanner that can perform icmp ping sweep, and detect ports based on hostname or ips provided, that supports concurency.
+Custom network scanner that can perform ICMP ping sweep and detect ports using tcp based on provided hostnames or IPs, with support for concurrency.
 
 ### Build using
 ```bash

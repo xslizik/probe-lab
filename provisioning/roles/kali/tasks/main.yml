@@ -1,9 +1,10 @@
 ---
 - name: Restart networking
-  ansible.builtin.systemd:
-    name: networking
-    state: restarted
-    
+  command: systemctl restart networking
+
+- name: Add route to 10.10.0.0/16 via 10.20.0.1
+  command: ip route add 10.10.0.0/16 via 10.20.0.1
+
 - name: Update apt cache
   apt:
     update_cache: yes
@@ -13,33 +14,13 @@
     name: zmap
     state: present
 
-- name: Download Go binary
-  get_url:
-    url: https://golang.org/dl/go1.23.1.linux-amd64.tar.gz
-    dest: /tmp/go1.23.1.linux-amd64.tar.gz
-
-- name: Extract Go binary
-  unarchive:
-    src: /tmp/go1.23.1.linux-amd64.tar.gz
-    dest: /usr/local
-    remote_src: yes
-
-- name: Remove Go tar file
-  file:
-    path: /tmp/go1.23.1.linux-amd64.tar.gz
-    state: absent
-
-- name: Set up Go environment variable
-  lineinfile:
-    path: /etc/profile.d/golang.sh
-    line: 'export PATH=$PATH:/usr/local/go/bin'
-    create: yes
-    state: present
-
-- name: Copy nscan to /vagrant/home
+- name: Copy nscan to /opt and make it executable
   ansible.builtin.copy:
-    src: nscan 
+    src: nscan
     dest: /opt
+    mode: u+x,g+x,o+x
+    owner: root
+    group: root
 
 - ansible.builtin.include_tasks: openvas.yml
   when: include_openvas | bool

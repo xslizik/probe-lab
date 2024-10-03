@@ -1,0 +1,18 @@
+---
+- name: Enable IP forwarding
+  sysctl:
+    name: net.ipv4.ip_forward
+    reload: yes
+    sysctl_set: yes
+    state: present
+    value: '1'
+
+- name: Stop Postfix service
+  systemd:
+    name: postfix
+    state: stopped
+
+- name: Disable Postfix service
+  systemd:
+    name: postfix
+    enabled: no

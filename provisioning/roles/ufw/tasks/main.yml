@@ -19,3 +19,6 @@
   systemd:
     name: ufw
     enabled: yes
+
+- name: Add route to 10.20.0.0/16 via 10.10.0.1
+  command: ip route add 10.20.0.0/16 via 10.10.0.1

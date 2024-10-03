@@ -13,16 +13,15 @@
   roles:
     - role: ftp
     - role: smb
+    - role: smtp-stop
 
 - name: Setup Telnet/SNMP Server
   hosts: server2
   become: yes
   roles:
     - role: snmp
-    - role: telnet
-    - role: smtp-stop
 
-- name: Setup and enable UFW
+- name: Enable UFW and setup Routing 
   hosts: servers
   become: yes
   roles:
@@ -33,3 +32,9 @@
   hosts: kali
   roles: 
     - kali
+
+- name: Execute router role
+  become: yes
+  hosts: router
+  roles:
+    - router

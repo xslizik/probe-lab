@@ -11,7 +11,7 @@
       # Weak community string allowing unauthorized access
       com2sec notConfigUser  default       public
       # Allow SNMP requests on specific port and IP address
-      agentAddress udp:{{ ansible_default_ipv4.address }}:{{ snmp_port }}
+      agentAddress tcp:{{ ansible_default_ipv4.address }}:{{ snmp_port }}
       
       # Include other insecure settings (optional)
       view all    included  .1

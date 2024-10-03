@@ -1,10 +1,8 @@
 ---
 snmp_port: 161
-telnet_port: 23
 
 # UFW enabled ports other than SSH
 ports:
   - "{{ snmp_port }}"   
-  - "{{ telnet_port }}" 
   - "{{ smtp_port }}"
   
