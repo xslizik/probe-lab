@@ -25,4 +25,4 @@ To run OpenVAS, increase `vb.memory` in Vagrantfile and set `/host_vars/kali.yml
 docker run -d -p 443:443 --name openvas mikesplain/openvas
 ```
 
-<img style="text-align: center;" src="./topology.png">
+<img style="text-align: center;" src="./topology.jpg">
