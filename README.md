@@ -1,7 +1,7 @@
 # FIIT BIT 2024  
 ## Vulnerability Assessment in Large Networks Using Various Scanning Tools
 
-All machines share the same private network (/16).
+All machines share the same private network (/8).
 
 ### Quick Start
 
@@ -9,6 +9,7 @@ All machines share the same private network (/16).
 vagrant up -vvvv
 vagrant suspend
 vagrant resume
+vagrant destroy
 ```
 
 ### Kali

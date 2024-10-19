@@ -331,6 +331,7 @@ func main() {
 	portsFlag := flag.String("p", "0-1024", "Specify port(s) to scan (single, comma separated list, or hyphen separated range).")
 	workerFlag := flag.Int("w", 200, "Number of concurrent worker goroutines.")
 	grabFlag := flag.Bool("b", false, "Grab service banners from open ports.")
+	discoveryOnlyFlag := flag.Bool("d", false, "Discover hosts only.")
 
 	flag.Parse()
 
@@ -348,6 +349,9 @@ func main() {
 
 	availableIPs := findAvailableIps(ipRange, *hostnamesFlag, *workerFlag)
 	printIpRange(availableIPs)
+	if *discoveryOnlyFlag {
+		return
+	}
 
 	for _, ip := range availableIPs {
 		fmt.Printf("\nScanning IP: %s\n", ip)

@@ -28,13 +28,13 @@
     - role: ufw
 
 - name: Execute kali role
-  become: yes
   hosts: kali
+  become: yes
   roles: 
-    - kali
+    - role: kali
 
 - name: Execute router role
-  become: yes
   hosts: router
+  become: yes
   roles:
-    - router
+    - role: router
