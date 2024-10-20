@@ -6,10 +6,32 @@
   apt:
     update_cache: yes
 
+- name: Install cloud-guest-utils
+  apt:
+    name: cloud-guest-utils
+    state: present
+
+- name: Expand partition using growpart
+  command: growpart /dev/sda 1
+  register: growpart_result
+  changed_when: "'CHANGED' in growpart_result.stdout"
+
+- name: Resize the filesystem on /dev/sda1
+  filesystem:
+    fstype: ext4
+    dev: /dev/sda1
+    resizefs: yes
+  when: growpart_result is changed
+
 - name: Install Zmap
   apt:
     name: zmap
     state: present
+
+- name: Clear contents of existing Zmap configuration file
+  ansible.builtin.copy:
+    dest: /etc/zmap/zmap.conf
+    content: ""
 
 - name: Copy nscan to /opt and make it executable
   ansible.builtin.copy:
@@ -19,16 +41,44 @@
     owner: root
     group: root
 
-echo "" > /etc/zmap/zmap.conf
-sudo ip addr flush dev eth0
-
-- name: Copy tests.sh to /opt and make it executable
+- name: Copy test.sh to /opt and make it executable
   ansible.builtin.copy:
-    src: tests.sh
+    src: test.sh
     dest: /opt
     mode: u+x,g+x,o+x
     owner: root
     group: root
+
+- name: Copy pipeline.sh to /opt and make it executable
+  ansible.builtin.copy:
+    src: pipeline.sh
+    dest: /opt
+    mode: u+x,g+x,o+x
+    owner: root
+    group: root
+
+- name: Install Docker
+  apt:
+    name: docker.io
+    state: present
+
+- name: Add user kali to the docker group
+  user:
+    name: kali
+    groups: docker
+    append: yes
+
+- name: Ensure Docker service is started and enabled
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Ensure /tmp/webmap directory exists
+  file:
+    path: /tmp/webmap
+    state: directory
+    mode: '0755'
 
 - ansible.builtin.include_tasks: openvas.yml
   when: include_openvas | bool

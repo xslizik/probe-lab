@@ -3,7 +3,7 @@ ftp_port: 21
 smb_port: 445
 nmbd_port: 137
 
-# UFW enabled ports other than SSH
+# UFW enabled ports
 ports:
   - "{{ ssh_port }}"   
   - "{{ ftp_port }}"   

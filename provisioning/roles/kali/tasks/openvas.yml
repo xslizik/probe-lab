@@ -1,21 +1,4 @@
 ---
-- name: Install Docker
-  apt:
-    name: docker.io
-    state: present
-
-- name: Add user vagrant to the docker group
-  user:
-    name: vagrant
-    groups: docker
-    append: yes
-
-- name: Ensure Docker service is started and enabled
-  service:
-    name: docker
-    state: started
-    enabled: yes
-
 - name: Pull OpenVAS Docker image
   docker_image:
     name: mikesplain/openvas

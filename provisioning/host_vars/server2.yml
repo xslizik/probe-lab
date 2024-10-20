@@ -1,8 +1,9 @@
 ---
 snmp_port: 161
 
-# UFW enabled ports other than SSH
+# UFW enabled ports
 ports:
   - "{{ snmp_port }}"   
   - "{{ smtp_port }}"
+  - "{{ ssh_port }}"    
   

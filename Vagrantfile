@@ -5,7 +5,7 @@
 #kali_ip = "192.168.1.77" 
 
 ansible_groups = {
-  "hosts" => ["server0", "server1", "server2", "kali", "router"],
+  "hosts" => ["server0", "server1", "server2", "kali"],
   "servers" => ["server0", "server1", "server2"]
 }
 
@@ -31,13 +31,14 @@ Vagrant.configure("2") do |config|
   
     # Define Kali VM
   config.vm.define "kali" do |device|
+    device.vm.disk :disk, primary: true, size: "50GB"
     device.vm.hostname = "kali"
     device.vm.box = "munikypo/kali"
     device.vm.provider "virtualbox" do |vb|
       vb.name = "probe-lab-kali-#{timestamp}"
-      vb.gui = false
-      vb.memory = 4096
-      vb.cpus = 2
+      vb.gui = true
+      vb.memory = 8192
+      vb.cpus = 4
       vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
       vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
       vb.customize ["modifyvm", :id, "--vram", "128"]
