@@ -26,12 +26,12 @@ First check connectivity
 ```bash
 ips=(10.255.255.251 10.244.170.185 10.86.46.58 10.8.3.19 10.8.3.17 10.0.0.1); for ip in "${ips[@]}"; do ping -c 1 "$ip" > /dev/null && echo "$ip is reachable" || echo "$ip is unreachable"; done
 ```
-Results can be shown [here](./logs).
+Results can be shown [here](./data-processing/readme.md).
 ```bash
 /opt/test.sh 
 ```
 
-### WebMap 
+### WeMap 
 To access get token, and navigate to browser. Store scan output xml files in `/tmp/webmap`. Example [`/opt/pipeline.sh`](./provisioning/roles/kali/files/pipeline.sh).
 ```bash
 docker run -d \

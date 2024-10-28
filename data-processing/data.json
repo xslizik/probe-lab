@@ -1,0 +1,40 @@
+{
+    "ICMP_Host_Discovery": [
+      {"Tool": "Masscan", "Time": "29m53.888s", "Hit_Rate": 2},
+      {"Tool": "Zmap", "Time": "28m10.020s", "Hit_Rate": 1},
+      {"Tool": "Zmap", "Time": "28m17.344s", "Hit_Rate": 3},
+      {"Tool": "Zmap", "Time": "28m6.544s", "Hit_Rate": 2},
+      {"Tool": "Nscan", "Time": "172m0.775s", "Hit_Rate": 1},
+      {"Tool": "Nscan", "Time": "164m2.553s", "Hit_Rate": 1},
+      {"Tool": "Nscan", "Time": "172m2.942s", "Hit_Rate": 2},
+      {"Tool": "Nmap", "Time": "592m44.099s", "Hit_Rate": 3},
+      {"Tool": "Nmap", "Time": "422m20.367s", "Hit_Rate": 2},
+      {"Tool": "Nmap", "Time": "592m18.791s", "Hit_Rate": 3}
+    ],
+    "Service_Discovery": [
+      {"Tool": "Masscan", "Time": "28m10.339s", "Hit_Rate": 2},
+      {"Tool": "Masscan", "Time": "28m10.169s", "Hit_Rate": 2},
+      {"Tool": "Masscan", "Time": "28m7.447s", "Hit_Rate": 2},
+      {"Tool": "Zmap", "Time": "27m49.236s", "Hit_Rate": 2},
+      {"Tool": "Zmap", "Time": "27m51.260s", "Hit_Rate": 2},
+      {"Tool": "Zmap", "Time": "29m50.376s", "Hit_Rate": 2}
+    ],
+    "Fast_Port_Scan": [
+      {"Tool": "Masscan", "Time": "0m13.056s", "Hit_Rate": 5},
+      {"Tool": "Nscan", "Time": "0m3.886s", "Hit_Rate": 13},
+      {"Tool": "Nscan", "Time": "0m3.875s", "Hit_Rate": 12},
+      {"Tool": "Nscan", "Time": "0m6.284s", "Hit_Rate": 9},
+      {"Tool": "Nmap", "Time": "2m51.469s", "Hit_Rate": 19},
+      {"Tool": "Nmap", "Time": "2m51.296s", "Hit_Rate": 19},
+      {"Tool": "Nmap", "Time": "6m11.237s", "Hit_Rate": 22}
+    ],
+    "Complex_Port_Scan": [
+      {"Tool": "Masscan", "Time": "4m46.250s", "Hit_Rate": 6},
+      {"Tool": "Nscan", "Time": "3m56.084s", "Hit_Rate": 15},
+      {"Tool": "Nscan", "Time": "4m0.729s", "Hit_Rate": 18},
+      {"Tool": "Nmap", "Time": "5m4.167s", "Hit_Rate": 21},
+      {"Tool": "Nmap", "Time": "5m3.906s", "Hit_Rate": 21},
+      {"Tool": "Nmap", "Time": "6m11.237s", "Hit_Rate": 21}
+    ]
+  }
+  
