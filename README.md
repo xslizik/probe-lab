@@ -26,7 +26,7 @@ First check connectivity
 ```bash
 ips=(10.255.255.251 10.244.170.185 10.86.46.58 10.8.3.19 10.8.3.17 10.0.0.1); for ip in "${ips[@]}"; do ping -c 1 "$ip" > /dev/null && echo "$ip is reachable" || echo "$ip is unreachable"; done
 ```
-Results can be shown [here](./data-processing/readme.md).
+Results can be shown [here](./data-processing/processed_data.ipynb).
 ```bash
 /opt/test.sh 
 ```
