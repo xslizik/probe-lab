@@ -3,10 +3,11 @@
 
 All machines share the same home network (/8). They have static ips set up on home router based on their mac addresses.
 
-![](./assets/dhcp.png)
+![](./assets/mikrotik-dhcp.png)
 
-### Quick Start With [`./renew.sh`](./renew.sh)
+### Virtual Topology Start 
 
+Quick start with [`renew.sh`](./renew.sh).
 ```bash
 vagrant up -vvvv
 vagrant suspend
@@ -21,17 +22,17 @@ Username: kali
 Password: kali  
 ```
 
-### Tools Tested Using [`/opt/test.sh`](./provisioning/roles/kali/files/test.sh)
+### Tools Tested Using Script
 First check connectivity
 ```bash
 ips=(10.255.255.251 10.244.170.185 10.86.46.58 10.8.3.19 10.8.3.17 10.0.0.1); for ip in "${ips[@]}"; do ping -c 1 "$ip" > /dev/null && echo "$ip is reachable" || echo "$ip is unreachable"; done
 ```
-Results can be shown [here](./data-processing/processed_data.ipynb).
-```bash
-/opt/test.sh 
-```
+Then run the script [`/opt/test.sh`](./provisioning/roles/kali/files/test.sh)
 
-### WeMap 
+Results can be seen in [processed_data.ipynb](./data-processing/processed_data.ipynb). Read about the findings in [the semestral paper](./doc.pdf).
+
+
+### WebMap 
 To access get token, and navigate to browser. Store scan output xml files in `/tmp/webmap`. Example [`/opt/pipeline.sh`](./provisioning/roles/kali/files/pipeline.sh).
 ```bash
 docker run -d \
