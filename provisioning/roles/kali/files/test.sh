@@ -30,7 +30,7 @@ run_complex_port_scan() {
 }
 
 run_fast_host_discovery() {
-    echo -e "\n### Fast host discovery using ping"
+    echo -e "\n### Fast host discovery"
     echo "#### Running: masscan -i eth1 10.0.0.0/8 --ping --rate 10000"
     time masscan -i eth1 10.0.0.0/8 --ping --rate 10000
 

@@ -260,7 +260,7 @@ real    3m56.084s
 user    0m7.881s
 sys     0m22.704s
 
-### Fast host discovery using ping
+### Fast host discovery using
 #### Running: masscan -i eth1 10.0.0.0/8 --ping --rate 10000
 [+] resolving router 0.0.0.0 with ARP (may take some time)...
 [-] FAIL: ARP timed-out resolving MAC address for router eth1: "0.0.0.0"

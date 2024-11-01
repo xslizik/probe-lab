@@ -137,7 +137,7 @@ real    0m6.239s
 user    0m0.036s
 sys     0m0.089s
 
-### Fast host discovery using ping
+### Fast host discovery using
 #### Running: masscan -i eth1 10.0.0.0/8 --ping --rate 10000
 Starting masscan 1.3.2 (http://bit.ly/14GZzcT) at 2024-10-19 21:20:25 GMT
 Initiating ICMP Echo Scan

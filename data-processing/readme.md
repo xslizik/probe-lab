@@ -7,9 +7,14 @@ In four conducted scenarios average times of tools are calculated and visualized
 python -m pip install --user virtualenv
 python -m virtualenv VE
 .\VE\Scripts\activate
-pip install jupyter
 pip install -r requirements.txt
-pip freeze --local > requirements.txt
 jupyter notebook
 deactivate
+```
+
+if you want to add more
+
+```bash
+pip install jupyter
+pip freeze --local > requirements.txt
 ```

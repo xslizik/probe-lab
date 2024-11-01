@@ -1,5 +1,5 @@
 {
-    "ICMP_Host_Discovery": [
+    "Host_Discovery": [
       {"Tool": "Masscan", "Time": "29m53.888s", "Hit_Rate": 2},
       {"Tool": "Zmap", "Time": "28m10.020s", "Hit_Rate": 1},
       {"Tool": "Zmap", "Time": "28m17.344s", "Hit_Rate": 3},
